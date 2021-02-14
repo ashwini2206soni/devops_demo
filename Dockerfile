@@ -7,7 +7,7 @@ RUN pip install Flask gunicorn
 
 # Copy local code to the container image.
 WORKDIR /app
-COPY . .
+COPY ./tts/ .
 
 RUN pip install -r requirements.txt
 

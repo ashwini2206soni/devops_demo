@@ -11,9 +11,9 @@ resource "google_storage_bucket" "output_bucket" {
 }
 
 
-resource "google_cloudbuild_trigger" "filename-trigger" {
-  filename = "../tts/Dockerfile"
-}
+# resource "google_cloudbuild_trigger" "filename-trigger" {
+#   filename = "../tts/Dockerfile"
+# }
 
 
 # resource "google_cloud_run_service" "default" {
@@ -51,3 +51,18 @@ resource "google_cloudbuild_trigger" "filename-trigger" {
 
 #   policy_data = data.google_iam_policy.noauth.policy_data
 # }
+
+resource "google_cloudbuild_trigger" "my-trigger" {
+    provider = google-beta
+    name = "test-trigger"
+
+    github {
+        name = "devops_demo"
+        owner = "ashwini2206soni"
+        push {
+            branch = "master"
+        }
+    }
+
+    filename = "Dockerfile"
+}
